@@ -1,5 +1,10 @@
-fastapi==0.70.0
+fastapi==0.115.5
 uvicorn==0.15.0
 sqlalchemy==1.4.26
-pydantic==1.8.2
+pydantic==2.9.2
 pika==1.2.0
+pytest==7.3.1
+pytest-asyncio==0.21.0
+httpx==0.24.1
+pytest-mock==3.11.1
+psycopg2-binary==2.9.10
