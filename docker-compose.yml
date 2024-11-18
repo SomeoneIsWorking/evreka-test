@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.api
+    volumes:
+      - ./app:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -13,9 +15,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.tcp
+    volumes:
+      - ./app:/app
     ports:
       - "5500:5500"
     depends_on:
+      - rabbitmq
+
+  consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.consumer
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
       - rabbitmq
 
   db:
@@ -26,6 +40,8 @@ services:
       POSTGRES_DB: locationdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   rabbitmq:
     image: rabbitmq:3-management
